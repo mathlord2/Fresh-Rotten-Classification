@@ -34,9 +34,9 @@
 </script>
 
 <main>
-	<h1>Load fruit image:</h1>
-	<input type="file" id="fruit" class="inputFile" name="fruit" accept=".jpg, .jpeg, .png">
-	<label for="fruit">Upload <i class="fa fa-upload"></i></label>
+	<h1>Load fruit image</h1>
+	<input type="file" id="fruit" class="inputFile" name="fruit" accept=".jpg, .jpeg">
+	<label for="fruit">Upload (.jpg or .jpeg) <i class="fa fa-upload"></i></label>
 	<br>
 	{#if filename != undefined}
 		<p>{filename} has been uploaded.</p>
