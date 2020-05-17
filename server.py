@@ -12,6 +12,13 @@ from torch.utils.data.sampler import SubsetRandomSampler
 
 import PIL
 from PIL import Image
+import requests
+from io import BytesIO
+import base64
+import re
+
+from flask import Flask, send_from_directory, jsonify, request, url_for
+import random
 
 #CNN Model
 class CNN(nn.Module):
@@ -51,7 +58,7 @@ classes = ["Fresh Apple", "Fresh Banana", "Fresh Orange", "Rotten Apple", "Rotte
 model = CNN()
 
 device = torch.device('cpu')
-state_dict = torch.load("model/fruitsModel.pt", map_location=device)
+state_dict = torch.load("model/fruitsModel.pt", map_location=device) #Loading model
 model.load_state_dict(state_dict)
 
 images = os.listdir("./testImages/")
@@ -79,5 +86,31 @@ def predict(image, model):
     _, pred = torch.max(output, 1)
     return classes[np.squeeze(pred.cpu().numpy())]
 
-for image in images:
-    print(predict(image, model))
+#for image in images:
+    #print(predict(image, model))
+
+#Flask server
+app = Flask(__name__)
+
+filepath = ""
+
+@app.route("/")
+def base():
+    return send_from_directory('client/public', 'index.html')
+
+# Path for all the static files (compiled JS/CSS, etc.)
+@app.route("/<path:path>")
+def home(path):
+    return send_from_directory('client/public', path)
+
+@app.route("/getimg", methods=["POST", "GET"])
+def getimg():
+    if request.method == "POST":
+        filepath = re.sub('^data:image/.+;base64,', '', request.get_json(force=True).get("filename"))
+        print(filepath)
+        image = Image.open(BytesIO(base64.b64decode(filepath)))
+        prediction = predict(image, model)
+        return prediction
+    
+if __name__ == "__main__":
+    app.run(debug=True)
