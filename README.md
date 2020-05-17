@@ -1,37 +1,27 @@
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+A web app that classifies fresh and rotten fruits.
 
 ---
 
-# svelte app
-
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
-
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+# Running the app
+Once you have cloned the repository, navigate to the client folder through CMD/PowerShell and run npm install:
 
 ```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
-
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
-
-
-## Get started
-
-Install the dependencies...
-
-```bash
-cd svelte-app
+cd client
 npm install
 ```
 
-...then start [Rollup](https://rollupjs.org):
-
+To add your build files and load the frontend, run:
 ```bash
-npm run dev
+npm run autobuild
 ```
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+On a separate CMD/PowerShell, navigate to the main directory and run the Flask server:
+
+```bash
+python server.py
+```
+
+Navigate to [localhost:5000](http://localhost:5000) to view the app.
 
 By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
 
