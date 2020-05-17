@@ -1,4 +1,4 @@
-A web app that classifies fresh and rotten fruits.
+A web app that classifies fresh and rotten fruits using a trained PyTorch CNN.
 
 ---
 
