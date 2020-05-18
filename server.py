@@ -107,7 +107,6 @@ def home(path):
 def getimg():
     if request.method == "POST":
         filepath = re.sub('^data:image/.+;base64,', '', request.get_json(force=True).get("filename"))
-        print(filepath)
         image = Image.open(BytesIO(base64.b64decode(filepath)))
         prediction = predict(image, model)
         return prediction

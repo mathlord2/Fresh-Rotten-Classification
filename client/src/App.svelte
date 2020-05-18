@@ -45,7 +45,11 @@
 	{/if}
 	<!--<button on:click={submit}>Run Model</button>-->
 	{#if prediction != undefined}
-		<p>Prediction: {prediction}</p>
+		{#if prediction == "Fresh Apple" || prediction == "Fresh Orange" || prediction == "Fresh Banana"}
+			<p>Prediction: Fresh</p>
+		{:else}
+			<p>Prediction: Rotten</p>
+		{/if}
 	{/if}
 </main>
 
